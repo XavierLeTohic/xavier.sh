@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "next",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
+  "env": {
+    "jest": true
+  }
+}

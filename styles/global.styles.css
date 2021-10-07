@@ -1,0 +1,66 @@
+:root {
+  --ui-color-white: #FFFFFF;
+  --ui-color-orange: #F3BEAC;
+  --ui-color-orange-light: #FCF4F2;
+  --ui-color-orange-accent: #f5845e;
+  --ui-color-orange-text: #AA624C;
+
+  --ui-color-green: #BDD1C8;
+  --ui-color-green-light: #EBF4EF;
+  --ui-color-green-accent: #51A687;
+
+  --ui-color-blue: #CEE4F2;
+  --ui-color-blue-accent: #607A89;
+
+  --ui-color-dark: #0F0F0F;
+
+  --ui-control-margin: 8px;
+  --ui-control-radius: 16px;
+}
+
+html, body {
+  background-color: var(--ui-color-white);
+  color: var(--ui-color-dark);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: 'Epilogue', sans-serif;
+  font-size: 14px;
+}
+
+div#__next {
+  max-width: 80vw;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  position: fixed; /* absolute */
+  top: 0;
+  left: 0;
+  width: 100vw;    /* 100% */
+  height: 100vh;   /* 100% */
+  cursor: default;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+}
+
+@font-face {
+  font-family: 'Epilogue', sans-serif;
+  src: local('Epilogue');
+}
+
+@font-face {
+  font-family: 'Sora', sans-serif;
+  src: local('Sora');
+}
+
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: local('Roboto');
+}

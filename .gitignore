@@ -1,0 +1,6 @@
+# folders
+node_modules/
+.next/
+
+#logs
+yarn-error.log

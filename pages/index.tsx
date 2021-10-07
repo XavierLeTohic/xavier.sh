@@ -1,7 +1,6 @@
 import { ConfigContext, defaultConfig } from '../context/ConfigContext';
 import { useEffect, useRef, useState } from 'react';
 
-// import Header from '../components/Header';
 import Button from '../components/Button';
 import { CanvasContext } from '../context/CanvasContext';
 import ViewBox from '../components/ViewBox';
@@ -15,21 +14,6 @@ function Homepage() {
   })
 
   useEffect(() => {
-    const handleResize = () => {
-
-      if(dimensions.height !== window.innerHeight || dimensions.width !== window.innerWidth) {  
-        setDimensions({
-          height: window.innerHeight,
-          width: window.innerWidth
-        });
-
-        canvas.current.width = window.innerWidth;
-        canvas.current.height = window.innerHeight;
-        setContext(canvas.current.getContext('2d'));
-      }
-    }
-
-    handleResize();
     
     if(canvas.current) {
       canvas.current.width = window.innerWidth;
@@ -38,7 +22,19 @@ function Homepage() {
       setContext(ctx);
     }
 
-    window.addEventListener('resize', handleResize)
+    const resizeObserver = new ResizeObserver((entries) => {
+      const [body] = entries;
+
+      setDimensions({
+        height: body.contentRect.height,
+        width: body.contentRect.width,
+      });
+
+      canvas.current.height = body.contentRect.height;
+      canvas.current.width = body.contentRect.width;
+      setContext(canvas.current.getContext('2d'));
+    });
+    resizeObserver.observe(document.body);
   }, []);
 
   return (
@@ -48,9 +44,11 @@ function Homepage() {
         <ConfigContext.Provider value={defaultConfig}>
           <CanvasContext.Provider value={context}>
             <>
-              <ViewBox padding={40}>
-                <ViewBox padding={40}>
-                  <Button text="Click on me" fontSize={16} height={40} radius={6}  />
+              <ViewBox padding={40} id="root-wrapper" paddingColor="blue">
+                <ViewBox padding={40} id="middle-wrapper" paddingColor="green">
+                  <ViewBox padding={40} id="button-wrapper">
+                    <Button text="Click on me" fontSize={16} height={40} radius={6}  />
+                  </ViewBox>
                 </ViewBox>
               </ViewBox>
             </>

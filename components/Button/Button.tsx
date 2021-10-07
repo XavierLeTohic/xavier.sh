@@ -20,7 +20,6 @@ const Button : FC<Props> = ({ text, fontSize = 16, height : h, width, radius = 0
   const viewBox = useContext(ViewBoxContext);
   const [id] = useState(nanoid());
 
-
   let w = width;
 
   if(!w) {

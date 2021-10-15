@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Button from '../components/Button';
 import { CanvasContext } from '../context/CanvasContext';
-import ViewBox from '../components/ViewBox';
+import Layer from '../components/Layer';
 
 function Homepage() {
   const canvas = useRef(null);
@@ -44,13 +44,20 @@ function Homepage() {
         <ConfigContext.Provider value={defaultConfig}>
           <CanvasContext.Provider value={context}>
             <>
-              <ViewBox padding={40} id="root-wrapper" paddingColor="blue">
-                <ViewBox padding={40} id="middle-wrapper" paddingColor="green">
-                  <ViewBox padding={40} id="button-wrapper">
+              <Layer padding={40} id="blue-wrapper" paddingColor="blue">
+                <Layer padding={40} id="green-wrapper" paddingColor="green">
+                  <Layer padding={40} id="buttons-wrapper">
+                    <Button text="Click on me" fontSize={16} height={40} radius={6} id="first-button" />
+                    <Button text="Click on me" fontSize={16} height={40} radius={6} id="first-button" />
+                    <Button text="Click on me" fontSize={16} height={40} radius={6} id="first-button" />
+                  </Layer>
+                </Layer>
+                {/* <Layer padding={40} id="second-wrapper" paddingColor="green">
+                  <Layer padding={40}>
                     <Button text="Click on me" fontSize={16} height={40} radius={6}  />
-                  </ViewBox>
-                </ViewBox>
-              </ViewBox>
+                  </Layer>
+                </Layer> */}
+              </Layer>
             </>
           </CanvasContext.Provider>
         </ConfigContext.Provider>

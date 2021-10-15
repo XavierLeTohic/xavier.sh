@@ -12,28 +12,29 @@ type Props = {
   x?: number;
   y?: number;
   fontSize?: number;
+  id?: string;
 }
 
-const Button : FC<Props> = ({ text, fontSize = 16, height : h, width, radius = 0, x: originalX = 0, y: originalY = 0 }) => {
+const Button : FC<Props> = ({ text, fontSize = 16, height : h, width, radius = 0, x: originalX = 0, y: originalY = 0, id: originalId }) => {
 
   const ctx = useContext(CanvasContext);
-  const viewBox = useContext(ViewBoxContext);
-  const [id] = useState(nanoid());
+  const parentViewBox = useContext(ViewBoxContext);
+  const [id] = useState(originalId || nanoid());
 
   let w = width;
 
   if(!w) {
-    w = viewBox?.availableWidth ? viewBox?.availableWidth : ctx.canvas.width;
+    w = parentViewBox?.availableWidth ? parentViewBox?.availableWidth : ctx.canvas.width;
   }
 
-  const x = viewBox?.constraintX ? viewBox.constraintX + originalX : originalX;
-  const y = viewBox?.constraintY ? viewBox.constraintY + originalY : originalY;
+  const x = parentViewBox?.constraintX || originalX
+  const y =parentViewBox?.constraintY || originalY;
 
   const [isHover, setIsHover] = useState(false);
 
   useEffect(() => {
-    if(viewBox?.onNewChild) {
-      viewBox?.onNewChild({ id, height: h })
+    if(parentViewBox?.onNewChild) {
+      parentViewBox?.onNewChild({ id, height: h, x, y })
     }
   }, []);
 
